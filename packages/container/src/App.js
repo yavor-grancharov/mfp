@@ -32,7 +32,7 @@ export default () => {
     <BrowserRouter>
       <StylesProvider generateClassName={generateClassName}>
         <div>
-          <Header isSignedin={isSignedin} onSignOut={handleSignout} />
+          <Header isSignedin={isSignedin} onSignout={handleSignout} />
           <React.Suspense fallback={<LoadingBar />}>
             <Switch>
               <Route path="/auth">
