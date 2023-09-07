@@ -8,18 +8,18 @@ import App from "./App";
  * @param {*} htmlEl
  */
 
-const mount = (htmlEl, { onNavigate, defaultHistory, initialPath }) => {
+const mount = (
+  htmlEl,
+  { onSignin, onNavigate, defaultHistory, initialPath }
+) => {
   const history =
-    defaultHistory ||
-    createMemoryHistory({
-      initialEntries: [initialPath],
-    });
+    defaultHistory || createMemoryHistory({ initialEntries: [initialPath] });
 
   if (onNavigate) {
     history.listen(onNavigate);
   }
 
-  ReactDOM.render(<App history={history} />, htmlEl);
+  ReactDOM.render(<App history={history} onSignin={onSignin} />, htmlEl);
 
   return {
     onParentNavigate({ pathname: nextPath }) {
@@ -35,7 +35,7 @@ const mount = (htmlEl, { onNavigate, defaultHistory, initialPath }) => {
  * If development and isolation mount immediately
  */
 if (process.env.NODE_ENV === "development") {
-  const root = document.querySelector("#marketing-root");
+  const root = document.querySelector("#auth-root");
 
   if (root) {
     mount(root, { defaultHistory: createBrowserHistory() });
